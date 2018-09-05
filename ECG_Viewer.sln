@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECG_Viewer", "ECG_Viewer.csproj", "{EAFAB0AB-FF54-4A19-BD96-8F9702B9C2AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAFAB0AB-FF54-4A19-BD96-8F9702B9C2AC}.Debug|x86.ActiveCfg = Debug|x86
+		{EAFAB0AB-FF54-4A19-BD96-8F9702B9C2AC}.Debug|x86.Build.0 = Debug|x86
+		{EAFAB0AB-FF54-4A19-BD96-8F9702B9C2AC}.Release|x86.ActiveCfg = Release|x86
+		{EAFAB0AB-FF54-4A19-BD96-8F9702B9C2AC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4116826E-A470-44CF-9768-E883CFBFE214}
+	EndGlobalSection
+EndGlobal
