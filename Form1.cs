@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using ECG_Viewer.Service;
+using ECG_Viewer.Models;
 //using System.IO;
 
 namespace ECG_Viewer
@@ -310,51 +312,6 @@ namespace ECG_Viewer
             pps_cnt = 0;
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                //(pictureBox1.Image as Bitmap).Save("e:\\bitmap.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
-                try
-                {
-                    if (data_Ch1.Count > 0)
-                    {
-                        string path1 = "v:\\ECG_Ch1_" + DateTime.Now.Hour.ToString()+ DateTime.Now.Minute.ToString()+ DateTime.Now.Second.ToString() + ".csv";
-                        fl = new FileStream(path1, FileMode.Create, FileAccess.Write);
-                        StreamWriter o_sw = new StreamWriter(fl);
-                        foreach (double p in data_Ch1)
-                        {
-                            //string o_st = p.Y.ToString();
-                            o_sw.WriteLine(p);
-                        }
-                        o_sw.Close();
-                    }
-
-                    if (data_Ch2.Count > 0)
-                    {
-                        string path2 = "v:\\ECG_Ch2_" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + ".csv";
-                        fl = new FileStream(path2, FileMode.OpenOrCreate, FileAccess.Write);
-                        StreamWriter o_sw2 = new StreamWriter(fl);
-                        foreach (double p in data_Ch2)
-                        {
-                            //string o_st = p.Y.ToString();
-                            o_sw2.WriteLine(p);
-                        }
-                        o_sw2.Close();
-                    }
-                }
-                catch
-                {
-                    SaveButton.Text = "Ошибка файлов таблицы";
-                }
-            }
-            catch
-            {
-                SaveButton.Text = "Ошибка файла графики";
-            }
-        }
-
         private void ConnectionSpeedSelectTextBox_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             char tmp = e.KeyChar;
@@ -416,7 +373,36 @@ namespace ECG_Viewer
             pbs.Height -= 30 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
             pbs.Width -= 155 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
             chart1.Size = pbs;*/
-        } 
-        
+        }
+
+#region Работа с файлами
+        /// <summary>Кнопка открытия файла</summary>
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+            var FileWorker = new FileWorker();
+
+            var record = FileWorker.LoadRecord(
+                error => MessageBox.Show(this, error, "Ошибка открытия файла", 
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
+
+            if (record == null) return;
+
+            data_Ch1 = record.Ch1; //Данные прочитали, но график сейчас не обновится
+            data_Ch2 = record.Ch2;
+        }
+
+        /// <summary>Кнопка сохранения файла</summary>
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            var FileWorker = new FileWorker();
+
+            var record = new Record() { Ch1 = data_Ch1, Ch2 = data_Ch2 };
+
+            FileWorker.SaveSeries(record,
+                error => MessageBox.Show(this, error, "Ошибка сохранения файла",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
+        }
+#endregion
+
     }
 }
