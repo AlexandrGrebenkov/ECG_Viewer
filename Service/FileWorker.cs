@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace ECG_Viewer.Service
 {
-    public class FileWorker
+    public class FileWorker : IFileWorker
     {
         /// <summary>
         /// Сохранение записи в бинарный файл. <para/>
