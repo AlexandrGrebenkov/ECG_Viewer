@@ -36,7 +36,6 @@
             this.MinYTextBox = new System.Windows.Forms.TextBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.MaxYTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.ClearScreenButton = new System.Windows.Forms.Button();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.RefreshPortsButton = new System.Windows.Forms.Button();
@@ -54,16 +53,11 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Ch1EnCB = new System.Windows.Forms.CheckBox();
             this.Ch2EnCB = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.ScaleFromCh1CB = new System.Windows.Forms.CheckBox();
             this.ScaleFromCh2CB = new System.Windows.Forms.CheckBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.Filtr30HzEn = new System.Windows.Forms.CheckBox();
             this.Filtr50HzEn = new System.Windows.Forms.CheckBox();
             this.Filtr80HzEn = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.AFiltr50Hz = new System.Windows.Forms.CheckBox();
@@ -73,20 +67,25 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // MinYTextBox
             // 
-            this.MinYTextBox.Location = new System.Drawing.Point(44, 178);
+            this.MinYTextBox.Location = new System.Drawing.Point(103, 44);
             this.MinYTextBox.Name = "MinYTextBox";
-            this.MinYTextBox.Size = new System.Drawing.Size(82, 20);
+            this.MinYTextBox.Size = new System.Drawing.Size(73, 20);
             this.MinYTextBox.TabIndex = 273;
             this.MinYTextBox.Text = "-240.0";
             // 
@@ -98,23 +97,16 @@
             // 
             // MaxYTextBox
             // 
-            this.MaxYTextBox.Location = new System.Drawing.Point(43, 148);
+            this.MaxYTextBox.Location = new System.Drawing.Point(103, 22);
             this.MaxYTextBox.Name = "MaxYTextBox";
-            this.MaxYTextBox.Size = new System.Drawing.Size(83, 20);
+            this.MaxYTextBox.Size = new System.Drawing.Size(73, 20);
             this.MaxYTextBox.TabIndex = 274;
             this.MaxYTextBox.Text = "240.0";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 132);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 13);
-            this.label1.TabIndex = 270;
-            this.label1.Text = "Debug";
-            // 
             // ClearScreenButton
             // 
+            this.ClearScreenButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ClearScreenButton.Location = new System.Drawing.Point(46, 527);
             this.ClearScreenButton.Name = "ClearScreenButton";
             this.ClearScreenButton.Size = new System.Drawing.Size(113, 25);
@@ -174,10 +166,12 @@
             // 
             // ExitButton
             // 
+            this.ExitButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ExitButton.Location = new System.Drawing.Point(46, 558);
+            this.ExitButton.Location = new System.Drawing.Point(46, 557);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(113, 30);
+            this.ExitButton.Size = new System.Drawing.Size(113, 25);
             this.ExitButton.TabIndex = 268;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
@@ -185,6 +179,8 @@
             // 
             // SaveButton
             // 
+            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SaveButton.Location = new System.Drawing.Point(46, 497);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(113, 25);
@@ -196,7 +192,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(87, 370);
+            this.label4.Location = new System.Drawing.Point(36, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 279;
@@ -204,7 +200,7 @@
             // 
             // K_Ch1_TextBox
             // 
-            this.K_Ch1_TextBox.Location = new System.Drawing.Point(81, 386);
+            this.K_Ch1_TextBox.Location = new System.Drawing.Point(30, 39);
             this.K_Ch1_TextBox.Name = "K_Ch1_TextBox";
             this.K_Ch1_TextBox.Size = new System.Drawing.Size(56, 20);
             this.K_Ch1_TextBox.TabIndex = 280;
@@ -212,7 +208,7 @@
             // 
             // K_Ch2_TextBox
             // 
-            this.K_Ch2_TextBox.Location = new System.Drawing.Point(81, 426);
+            this.K_Ch2_TextBox.Location = new System.Drawing.Point(123, 39);
             this.K_Ch2_TextBox.Name = "K_Ch2_TextBox";
             this.K_Ch2_TextBox.Size = new System.Drawing.Size(56, 20);
             this.K_Ch2_TextBox.TabIndex = 282;
@@ -221,7 +217,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(87, 410);
+            this.label5.Location = new System.Drawing.Point(129, 23);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 13);
             this.label5.TabIndex = 281;
@@ -231,7 +227,7 @@
             // 
             this.FiltrCheckBox.AutoSize = true;
             this.FiltrCheckBox.Enabled = false;
-            this.FiltrCheckBox.Location = new System.Drawing.Point(60, 465);
+            this.FiltrCheckBox.Location = new System.Drawing.Point(74, 24);
             this.FiltrCheckBox.Name = "FiltrCheckBox";
             this.FiltrCheckBox.Size = new System.Drawing.Size(102, 17);
             this.FiltrCheckBox.TabIndex = 283;
@@ -273,7 +269,7 @@
             this.Ch1EnCB.AutoSize = true;
             this.Ch1EnCB.Checked = true;
             this.Ch1EnCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Ch1EnCB.Location = new System.Drawing.Point(60, 389);
+            this.Ch1EnCB.Location = new System.Drawing.Point(9, 42);
             this.Ch1EnCB.Name = "Ch1EnCB";
             this.Ch1EnCB.Size = new System.Drawing.Size(15, 14);
             this.Ch1EnCB.TabIndex = 285;
@@ -282,27 +278,18 @@
             // Ch2EnCB
             // 
             this.Ch2EnCB.AutoSize = true;
-            this.Ch2EnCB.Location = new System.Drawing.Point(60, 429);
+            this.Ch2EnCB.Location = new System.Drawing.Point(102, 42);
             this.Ch2EnCB.Name = "Ch2EnCB";
             this.Ch2EnCB.Size = new System.Drawing.Size(15, 14);
             this.Ch2EnCB.TabIndex = 285;
             this.Ch2EnCB.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 286;
-            this.label2.Text = "Масштаб по:";
             // 
             // ScaleFromCh1CB
             // 
             this.ScaleFromCh1CB.AutoSize = true;
             this.ScaleFromCh1CB.Checked = true;
             this.ScaleFromCh1CB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ScaleFromCh1CB.Location = new System.Drawing.Point(15, 31);
+            this.ScaleFromCh1CB.Location = new System.Drawing.Point(10, 24);
             this.ScaleFromCh1CB.Name = "ScaleFromCh1CB";
             this.ScaleFromCh1CB.Size = new System.Drawing.Size(45, 17);
             this.ScaleFromCh1CB.TabIndex = 287;
@@ -314,33 +301,23 @@
             this.ScaleFromCh2CB.AutoSize = true;
             this.ScaleFromCh2CB.Checked = true;
             this.ScaleFromCh2CB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ScaleFromCh2CB.Location = new System.Drawing.Point(71, 31);
+            this.ScaleFromCh2CB.Location = new System.Drawing.Point(10, 46);
             this.ScaleFromCh2CB.Name = "ScaleFromCh2CB";
             this.ScaleFromCh2CB.Size = new System.Drawing.Size(45, 17);
             this.ScaleFromCh2CB.TabIndex = 287;
             this.ScaleFromCh2CB.Text = "Ch2";
             this.ScaleFromCh2CB.UseVisualStyleBackColor = true;
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.ScaleFromCh2CB);
-            this.panel1.Controls.Add(this.ScaleFromCh1CB);
-            this.panel1.Location = new System.Drawing.Point(43, 308);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(116, 59);
-            this.panel1.TabIndex = 288;
-            // 
             // Filtr30HzEn
             // 
             this.Filtr30HzEn.AutoSize = true;
             this.Filtr30HzEn.Checked = true;
             this.Filtr30HzEn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Filtr30HzEn.Location = new System.Drawing.Point(45, 228);
+            this.Filtr30HzEn.Location = new System.Drawing.Point(6, 24);
             this.Filtr30HzEn.Name = "Filtr30HzEn";
-            this.Filtr30HzEn.Size = new System.Drawing.Size(15, 14);
+            this.Filtr30HzEn.Size = new System.Drawing.Size(53, 17);
             this.Filtr30HzEn.TabIndex = 289;
+            this.Filtr30HzEn.Text = "30 Гц";
             this.Filtr30HzEn.UseVisualStyleBackColor = true;
             // 
             // Filtr50HzEn
@@ -348,10 +325,11 @@
             this.Filtr50HzEn.AutoSize = true;
             this.Filtr50HzEn.Checked = true;
             this.Filtr50HzEn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Filtr50HzEn.Location = new System.Drawing.Point(83, 228);
+            this.Filtr50HzEn.Location = new System.Drawing.Point(6, 46);
             this.Filtr50HzEn.Name = "Filtr50HzEn";
-            this.Filtr50HzEn.Size = new System.Drawing.Size(15, 14);
+            this.Filtr50HzEn.Size = new System.Drawing.Size(53, 17);
             this.Filtr50HzEn.TabIndex = 289;
+            this.Filtr50HzEn.Text = "50 Гц";
             this.Filtr50HzEn.UseVisualStyleBackColor = true;
             // 
             // Filtr80HzEn
@@ -359,43 +337,18 @@
             this.Filtr80HzEn.AutoSize = true;
             this.Filtr80HzEn.Checked = true;
             this.Filtr80HzEn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Filtr80HzEn.Location = new System.Drawing.Point(120, 228);
+            this.Filtr80HzEn.Location = new System.Drawing.Point(6, 68);
             this.Filtr80HzEn.Name = "Filtr80HzEn";
-            this.Filtr80HzEn.Size = new System.Drawing.Size(15, 14);
+            this.Filtr80HzEn.Size = new System.Drawing.Size(53, 17);
             this.Filtr80HzEn.TabIndex = 289;
+            this.Filtr80HzEn.Tag = "";
+            this.Filtr80HzEn.Text = "80 Гц";
             this.Filtr80HzEn.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 212);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 290;
-            this.label3.Text = "30Hz";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(78, 212);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
-            this.label6.TabIndex = 290;
-            this.label6.Text = "50Hz";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(112, 212);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 13);
-            this.label7.TabIndex = 290;
-            this.label7.Text = "80Hz";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(129, 151);
+            this.label8.Location = new System.Drawing.Point(68, 26);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(33, 13);
             this.label8.TabIndex = 291;
@@ -404,7 +357,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(129, 181);
+            this.label9.Location = new System.Drawing.Point(68, 48);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(30, 13);
             this.label9.TabIndex = 291;
@@ -413,16 +366,17 @@
             // AFiltr50Hz
             // 
             this.AFiltr50Hz.AutoSize = true;
-            this.AFiltr50Hz.Location = new System.Drawing.Point(43, 273);
+            this.AFiltr50Hz.Location = new System.Drawing.Point(74, 46);
             this.AFiltr50Hz.Name = "AFiltr50Hz";
-            this.AFiltr50Hz.Size = new System.Drawing.Size(15, 14);
+            this.AFiltr50Hz.Size = new System.Drawing.Size(74, 17);
             this.AFiltr50Hz.TabIndex = 292;
+            this.AFiltr50Hz.Text = "AFiltr50Hz";
             this.AFiltr50Hz.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(95, 270);
+            this.comboBox1.Location = new System.Drawing.Point(120, 66);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(49, 21);
             this.comboBox1.TabIndex = 293;
@@ -431,11 +385,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(87, 254);
+            this.label10.Location = new System.Drawing.Point(72, 69);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(69, 13);
+            this.label10.Size = new System.Drawing.Size(42, 13);
             this.label10.TabIndex = 294;
-            this.label10.Text = "Усреднение";
+            this.label10.Text = "Усред.";
             // 
             // splitContainer1
             // 
@@ -447,31 +401,12 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.label10);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel1.Controls.Add(this.ExitButton);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.AFiltr50Hz);
-            this.splitContainer1.Panel1.Controls.Add(this.label9);
-            this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.ClearScreenButton);
-            this.splitContainer1.Panel1.Controls.Add(this.label7);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.label6);
-            this.splitContainer1.Panel1.Controls.Add(this.MaxYTextBox);
-            this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.MinYTextBox);
-            this.splitContainer1.Panel1.Controls.Add(this.Filtr80HzEn);
             this.splitContainer1.Panel1.Controls.Add(this.SaveButton);
-            this.splitContainer1.Panel1.Controls.Add(this.Filtr50HzEn);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.Filtr30HzEn);
-            this.splitContainer1.Panel1.Controls.Add(this.K_Ch1_TextBox);
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
-            this.splitContainer1.Panel1.Controls.Add(this.label5);
-            this.splitContainer1.Panel1.Controls.Add(this.Ch2EnCB);
-            this.splitContainer1.Panel1.Controls.Add(this.K_Ch2_TextBox);
-            this.splitContainer1.Panel1.Controls.Add(this.Ch1EnCB);
-            this.splitContainer1.Panel1.Controls.Add(this.FiltrCheckBox);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
@@ -514,6 +449,52 @@
             this.label12.TabIndex = 267;
             this.label12.Text = "Скорость:";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ScaleFromCh1CB);
+            this.groupBox2.Controls.Add(this.ScaleFromCh2CB);
+            this.groupBox2.Controls.Add(this.MaxYTextBox);
+            this.groupBox2.Controls.Add(this.MinYTextBox);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Location = new System.Drawing.Point(6, 113);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(185, 81);
+            this.groupBox2.TabIndex = 296;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Масштаб";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.Filtr30HzEn);
+            this.groupBox3.Controls.Add(this.Filtr50HzEn);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.Filtr80HzEn);
+            this.groupBox3.Controls.Add(this.comboBox1);
+            this.groupBox3.Controls.Add(this.FiltrCheckBox);
+            this.groupBox3.Controls.Add(this.AFiltr50Hz);
+            this.groupBox3.Location = new System.Drawing.Point(6, 201);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(185, 100);
+            this.groupBox3.TabIndex = 297;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Фильтрация";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.K_Ch1_TextBox);
+            this.groupBox4.Controls.Add(this.Ch1EnCB);
+            this.groupBox4.Controls.Add(this.K_Ch2_TextBox);
+            this.groupBox4.Controls.Add(this.Ch2EnCB);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Location = new System.Drawing.Point(6, 308);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(185, 71);
+            this.groupBox4.TabIndex = 298;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "groupBox4";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -526,15 +507,18 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -544,7 +528,6 @@
         private System.Windows.Forms.TextBox MinYTextBox;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.TextBox MaxYTextBox;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ClearScreenButton;
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Button RefreshPortsButton;
@@ -562,16 +545,11 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.CheckBox Ch1EnCB;
         private System.Windows.Forms.CheckBox Ch2EnCB;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox ScaleFromCh1CB;
         private System.Windows.Forms.CheckBox ScaleFromCh2CB;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox Filtr30HzEn;
         private System.Windows.Forms.CheckBox Filtr50HzEn;
         private System.Windows.Forms.CheckBox Filtr80HzEn;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox AFiltr50Hz;
@@ -581,6 +559,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 
