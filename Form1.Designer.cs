@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.MinYTextBox = new System.Windows.Forms.TextBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.MaxYTextBox = new System.Windows.Forms.TextBox();
@@ -70,12 +70,16 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MinYTextBox
@@ -127,9 +131,9 @@
             // 
             // RefreshPortsButton
             // 
-            this.RefreshPortsButton.Location = new System.Drawing.Point(45, 65);
+            this.RefreshPortsButton.Location = new System.Drawing.Point(6, 72);
             this.RefreshPortsButton.Name = "RefreshPortsButton";
-            this.RefreshPortsButton.Size = new System.Drawing.Size(121, 23);
+            this.RefreshPortsButton.Size = new System.Drawing.Size(80, 23);
             this.RefreshPortsButton.TabIndex = 266;
             this.RefreshPortsButton.Text = "Refresh";
             this.RefreshPortsButton.UseVisualStyleBackColor = true;
@@ -137,9 +141,9 @@
             // 
             // OpenCloseConnectionButton
             // 
-            this.OpenCloseConnectionButton.Location = new System.Drawing.Point(45, 94);
+            this.OpenCloseConnectionButton.Location = new System.Drawing.Point(99, 72);
             this.OpenCloseConnectionButton.Name = "OpenCloseConnectionButton";
-            this.OpenCloseConnectionButton.Size = new System.Drawing.Size(121, 25);
+            this.OpenCloseConnectionButton.Size = new System.Drawing.Size(80, 25);
             this.OpenCloseConnectionButton.TabIndex = 265;
             this.OpenCloseConnectionButton.Text = "Open";
             this.OpenCloseConnectionButton.UseVisualStyleBackColor = true;
@@ -153,9 +157,9 @@
             // 
             // ConnectionSpeedSelectTextBox
             // 
-            this.ConnectionSpeedSelectTextBox.Location = new System.Drawing.Point(46, 39);
+            this.ConnectionSpeedSelectTextBox.Location = new System.Drawing.Point(75, 46);
             this.ConnectionSpeedSelectTextBox.Name = "ConnectionSpeedSelectTextBox";
-            this.ConnectionSpeedSelectTextBox.Size = new System.Drawing.Size(121, 20);
+            this.ConnectionSpeedSelectTextBox.Size = new System.Drawing.Size(104, 20);
             this.ConnectionSpeedSelectTextBox.TabIndex = 264;
             this.ConnectionSpeedSelectTextBox.Text = "100000";
             this.ConnectionSpeedSelectTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ConnectionSpeedSelectTextBox_KeyPress_1);
@@ -163,9 +167,9 @@
             // SelectPortCBox
             // 
             this.SelectPortCBox.FormattingEnabled = true;
-            this.SelectPortCBox.Location = new System.Drawing.Point(46, 12);
+            this.SelectPortCBox.Location = new System.Drawing.Point(75, 19);
             this.SelectPortCBox.Name = "SelectPortCBox";
-            this.SelectPortCBox.Size = new System.Drawing.Size(121, 21);
+            this.SelectPortCBox.Size = new System.Drawing.Size(104, 21);
             this.SelectPortCBox.TabIndex = 263;
             // 
             // ExitButton
@@ -236,30 +240,30 @@
             // 
             // chart1
             // 
-            chartArea4.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Seconds;
-            chartArea4.AxisX.MajorGrid.Interval = 1D;
-            chartArea4.AxisX.MajorTickMark.Interval = 1D;
-            chartArea4.AxisX.Maximum = 5D;
-            chartArea4.AxisX.Minimum = 0D;
-            chartArea4.AxisX.MinorGrid.Enabled = true;
-            chartArea4.AxisY.MinorGrid.Enabled = true;
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
+            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Seconds;
+            chartArea1.AxisX.MajorGrid.Interval = 1D;
+            chartArea1.AxisX.MajorTickMark.Interval = 1D;
+            chartArea1.AxisX.Maximum = 5D;
+            chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisX.MinorGrid.Enabled = true;
+            chartArea1.AxisY.MinorGrid.Enabled = true;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series7.Legend = "Legend1";
-            series7.Name = "Ch1";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series8.Legend = "Legend1";
-            series8.Name = "Ch2";
-            this.chart1.Series.Add(series7);
-            this.chart1.Series.Add(series8);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.Legend = "Legend1";
+            series1.Name = "Ch1";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series2.Legend = "Legend1";
+            series2.Name = "Ch2";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(596, 600);
             this.chart1.TabIndex = 284;
             this.chart1.Text = "chart1";
@@ -443,15 +447,11 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.SelectPortCBox);
             this.splitContainer1.Panel1.Controls.Add(this.label10);
             this.splitContainer1.Panel1.Controls.Add(this.ExitButton);
             this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.ConnectionSpeedSelectTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.AFiltr50Hz);
-            this.splitContainer1.Panel1.Controls.Add(this.OpenCloseConnectionButton);
             this.splitContainer1.Panel1.Controls.Add(this.label9);
-            this.splitContainer1.Panel1.Controls.Add(this.RefreshPortsButton);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.ClearScreenButton);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
@@ -472,6 +472,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.K_Ch2_TextBox);
             this.splitContainer1.Panel1.Controls.Add(this.Ch1EnCB);
             this.splitContainer1.Panel1.Controls.Add(this.FiltrCheckBox);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
             // 
@@ -479,6 +480,39 @@
             this.splitContainer1.Size = new System.Drawing.Size(800, 600);
             this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 295;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.SelectPortCBox);
+            this.groupBox1.Controls.Add(this.OpenCloseConnectionButton);
+            this.groupBox1.Controls.Add(this.RefreshPortsButton);
+            this.groupBox1.Controls.Add(this.ConnectionSpeedSelectTextBox);
+            this.groupBox1.Location = new System.Drawing.Point(6, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(185, 104);
+            this.groupBox1.TabIndex = 295;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Подключение";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 23);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(35, 13);
+            this.label11.TabIndex = 267;
+            this.label11.Text = "Порт:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 50);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(58, 13);
+            this.label12.TabIndex = 267;
+            this.label12.Text = "Скорость:";
             // 
             // Form1
             // 
@@ -499,6 +533,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -542,6 +578,9 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }
 
