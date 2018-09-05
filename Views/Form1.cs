@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using ECG_Viewer.Service;
 using ECG_Viewer.Models;
-//using System.IO;
 
 namespace ECG_Viewer
 {
@@ -17,17 +11,12 @@ namespace ECG_Viewer
     {
         int point_counter = 0;
         int pps_cnt = 0;
-        //System.Windows.Forms.DataVisualization.Charting.DataPointCollection points_Buff;
-        //List<Point> points_Buff_Ch1 = new List<Point>();
-        //List<Point> points_Buff_Ch2 = new List<Point>();
+
         List<double> data_Ch1 = new List<double>();
         List<double> data_Ch2 = new List<double>();
 
         List<double> SmoothDataCh1 = new List<double>();
         List<double> SmoothDataCh2 = new List<double>();
-
-        //Filtr FiltrCh1 = new Filtr();
-        //Filtr FiltrCh2 = new Filtr();
 
         Filtr FiltrCh1_30Hz = new Filtr(Filtr.FILTR_30_HZ);
         Filtr FiltrCh2_30Hz = new Filtr(Filtr.FILTR_30_HZ);
@@ -42,22 +31,20 @@ namespace ECG_Viewer
         Filtr FiltrCh2_100_150Hz = new Filtr(Filtr.FILTR_100_150_HZ);
 
         Filtr FiltrCh1_Over_100Hz = new Filtr(Filtr.FILTR_Over100HZ);
-        Filtr FiltrCh2_Over_100Hz = new Filtr(Filtr.FILTR_Over100HZ); 
+        Filtr FiltrCh2_Over_100Hz = new Filtr(Filtr.FILTR_Over100HZ);
 
         iir AFiltrCh1_50_Hz = new iir();
         iir AFiltrCh2_50_Hz = new iir();
 
         double t_double = new double();
 
-        FileStream fl;
-
         const int ADCmax = 0xB96400;//0xC35000;//
 
         public Form1()
         {
             InitializeComponent();
-            SelectPortCBox.DataSource=System.IO.Ports.SerialPort.GetPortNames();
-            comboBox1.Items.AddRange(new object[] {"Off","x2","x4","x6","x8"});
+            SelectPortCBox.DataSource = System.IO.Ports.SerialPort.GetPortNames();
+            comboBox1.Items.AddRange(new object[] { "Off", "x2", "x4", "x6", "x8" });
             comboBox1.SelectedIndex = 0;
 
             timer1.Start();
@@ -77,7 +64,9 @@ namespace ECG_Viewer
                 }
             }
             this.Close();
-        }        
+        }
+
+        #region Serial Port
 
         private void RefreshPortsButton_Click(object sender, EventArgs e)
         {
@@ -118,6 +107,7 @@ namespace ECG_Viewer
                 }
             }
         }
+        #endregion
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -125,7 +115,7 @@ namespace ECG_Viewer
             {
                 if (serialPort1.BytesToRead > 0)
                 {
-                    int[] rx_buff = serialPort1.BytesToRead>=9 ? new int[serialPort1.BytesToRead] : new int[9];
+                    int[] rx_buff = serialPort1.BytesToRead >= 9 ? new int[serialPort1.BytesToRead] : new int[9];
                     int i = 0;
                     while (i < rx_buff.Length)//(i < 3)//
                     {
@@ -134,10 +124,10 @@ namespace ECG_Viewer
 
                     List<int> indexes = new List<int>();
 
-                    for (i = 2; i < (rx_buff.Length-8); i++)
+                    for (i = 2; i < (rx_buff.Length - 8); i++)
                     {
-                        if ((rx_buff[i - 2] == 0xAA) && (rx_buff[i - 1] == 0xAB) && (rx_buff[i] == 0xAC) && (rx_buff[i+5] == 0x55) && (rx_buff[i+6] == 0x55))
-                            indexes.Add(i+1);
+                        if ((rx_buff[i - 2] == 0xAA) && (rx_buff[i - 1] == 0xAB) && (rx_buff[i] == 0xAC) && (rx_buff[i + 5] == 0x55) && (rx_buff[i + 6] == 0x55))
+                            indexes.Add(i + 1);
                     }
 
                     if (t_double > 5.0d)
@@ -202,7 +192,7 @@ namespace ECG_Viewer
                                 MinYTextBox.Text = "-240.0";
                                 chart1.ChartAreas[0].AxisY.Minimum = -1;
                             }
-                        }                   
+                        }
                         data_Ch1.Clear();
                         data_Ch2.Clear();
                         SmoothDataCh1.Clear();
@@ -213,8 +203,8 @@ namespace ECG_Viewer
                     }
 
                     foreach (int index in indexes)
-                    {                       
-                        Int64 yCh1_int = (rx_buff[index + 1] << 16) + (rx_buff[index] << 8);                       
+                    {
+                        Int64 yCh1_int = (rx_buff[index + 1] << 16) + (rx_buff[index] << 8);
                         Int64 yCh2_int = (rx_buff[index + 3] << 16) + (rx_buff[index + 2] << 8);
 
                         double yCh1 = (double)(yCh1_int - ADCmax / 2) / (double)ADCmax;
@@ -254,51 +244,50 @@ namespace ECG_Viewer
                         data_Ch1.Add(yCh1);
                         data_Ch2.Add(yCh2);
 
-                        if ((comboBox1.SelectedIndex != 0) && (data_Ch1.Count>=comboBox1.SelectedIndex*2))
+                        if ((comboBox1.SelectedIndex != 0) && (data_Ch1.Count >= comboBox1.SelectedIndex * 2))
                         {
                             switch (comboBox1.SelectedIndex)
                             {
                                 case 1:
-                                    SmoothDataCh1.Add((data_Ch1[data_Ch1.Count-1]+data_Ch1[data_Ch1.Count-2])/2);
-                                    break;
+                                SmoothDataCh1.Add((data_Ch1[data_Ch1.Count - 1] + data_Ch1[data_Ch1.Count - 2]) / 2);
+                                break;
                                 case 2:
-                                    SmoothDataCh1.Add((data_Ch1[data_Ch1.Count - 1] + data_Ch1[data_Ch1.Count - 2] + data_Ch1[data_Ch1.Count - 3] + data_Ch1[data_Ch1.Count - 4]) / 4);
-                                    break;
+                                SmoothDataCh1.Add((data_Ch1[data_Ch1.Count - 1] + data_Ch1[data_Ch1.Count - 2] + data_Ch1[data_Ch1.Count - 3] + data_Ch1[data_Ch1.Count - 4]) / 4);
+                                break;
                                 case 3:
-                                    SmoothDataCh1.Add((data_Ch1[data_Ch1.Count - 1] + data_Ch1[data_Ch1.Count - 2] + data_Ch1[data_Ch1.Count - 3] + data_Ch1[data_Ch1.Count - 4] + data_Ch1[data_Ch1.Count - 5] + data_Ch1[data_Ch1.Count - 6] ) / 6);                        
-                                    break;
+                                SmoothDataCh1.Add((data_Ch1[data_Ch1.Count - 1] + data_Ch1[data_Ch1.Count - 2] + data_Ch1[data_Ch1.Count - 3] + data_Ch1[data_Ch1.Count - 4] + data_Ch1[data_Ch1.Count - 5] + data_Ch1[data_Ch1.Count - 6]) / 6);
+                                break;
                                 case 4:
-                                    SmoothDataCh1.Add((data_Ch1[data_Ch1.Count - 1] + data_Ch1[data_Ch1.Count - 2] + data_Ch1[data_Ch1.Count - 3] + data_Ch1[data_Ch1.Count - 4] + data_Ch1[data_Ch1.Count - 5] + data_Ch1[data_Ch1.Count - 6] + data_Ch1[data_Ch1.Count - 7] + data_Ch1[data_Ch1.Count - 8]) / 8);
-                                    break;                                
+                                SmoothDataCh1.Add((data_Ch1[data_Ch1.Count - 1] + data_Ch1[data_Ch1.Count - 2] + data_Ch1[data_Ch1.Count - 3] + data_Ch1[data_Ch1.Count - 4] + data_Ch1[data_Ch1.Count - 5] + data_Ch1[data_Ch1.Count - 6] + data_Ch1[data_Ch1.Count - 7] + data_Ch1[data_Ch1.Count - 8]) / 8);
+                                break;
                                 default:
-                                    break;
+                                break;
 
                             }
                         }
 
-                        if (Ch1EnCB.Checked) 
-                            if (comboBox1.SelectedIndex==0)
+                        if (Ch1EnCB.Checked)
+                            if (comboBox1.SelectedIndex == 0)
                                 chart1.Series[0].Points.AddXY(t_double, yCh1);
-                            else if (SmoothDataCh1.Count!=0)
+                            else if (SmoothDataCh1.Count != 0)
                                 chart1.Series[0].Points.AddXY(t_double, SmoothDataCh1.Last());
-                            
-                        if (Ch2EnCB.Checked) 
+
+                        if (Ch2EnCB.Checked)
                             chart1.Series[1].Points.AddXY(t_double, yCh2);
 
-                        t_double += 0.0025d; 
+                        t_double += 0.0025d;
                     }
-                    
+
                     pps_cnt++;
-                   
+
                 }
-       
+
             }
 
         }
 
         private void ClearScreenButton_Click(object sender, EventArgs e)
         {
-
             data_Ch1.Clear();
             data_Ch2.Clear();
             (chart1.Series[0]).Points.Clear();
@@ -324,7 +313,7 @@ namespace ECG_Viewer
 
         private double GetK_Ch1()
         {
-           
+
             double tmp = new double();
             try
             {
@@ -353,36 +342,14 @@ namespace ECG_Viewer
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
-            /*Size pbs = SystemInformation.PrimaryMonitorSize;
-            //Size pbs = Form1.ActiveForm.ClientSize;
-            pbs.Height -= 30 + System.Windows.Forms.SystemInformation.CaptionHeight + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
-            pbs.Width -= 155 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
-            chart1.Size = pbs;*/
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            /*Size pbs = Form1.ActiveForm.ClientSize;
-            pbs.Height -= 30 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
-            pbs.Width -= 155 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
-            chart1.Size = pbs;*/
-        }
-
-#region Работа с файлами
+        #region Работа с файлами
         /// <summary>Кнопка открытия файла</summary>
         private void LoadButton_Click(object sender, EventArgs e)
         {
             var FileWorker = new FileWorker();
 
             var record = FileWorker.LoadRecord(
-                error => MessageBox.Show(this, error, "Ошибка открытия файла", 
+                error => MessageBox.Show(this, error, "Ошибка открытия файла",
                                          MessageBoxButtons.OK, MessageBoxIcon.Error));
 
             if (record == null) return;
@@ -402,7 +369,7 @@ namespace ECG_Viewer
                 error => MessageBox.Show(this, error, "Ошибка сохранения файла",
                                          MessageBoxButtons.OK, MessageBoxIcon.Error));
         }
-#endregion
+        #endregion
 
     }
 }
