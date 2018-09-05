@@ -40,6 +40,29 @@ namespace ECG_Viewer
 
         const int ADCmax = 0xB96400;//0xC35000;//
 
+        /// <summary>Состояние последовательного порта</summary>
+        public bool IsConnected
+        {
+            set
+            {
+                if (value)
+                {
+                    OpenCloseConnectionButton.Text = "Закрыть";
+                    ConnectionSpeedSelectTextBox.Enabled =
+                    SelectPortCBox.Enabled =
+                    RefreshPortsButton.Enabled = false;
+                }
+                else
+                {
+                    OpenCloseConnectionButton.Text = "Открыть";
+                    ConnectionSpeedSelectTextBox.Enabled =
+                    SelectPortCBox.Enabled =
+                    RefreshPortsButton.Enabled = true;
+                }
+            }
+            get => serialPort1.IsOpen;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -53,7 +76,7 @@ namespace ECG_Viewer
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            if (serialPort1.IsOpen)
+            if (IsConnected)
             {
                 try
                 {
@@ -73,45 +96,58 @@ namespace ECG_Viewer
             SelectPortCBox.DataSource = System.IO.Ports.SerialPort.GetPortNames();
         }
 
+        /// <summary>Открыть/Закрыть порт</summary>
         private void OpenCloseConnectionButton_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
-            {
+            if (!IsConnected)
+            {// Открытие порта
                 serialPort1.PortName = SelectPortCBox.Text;
                 serialPort1.BaudRate = Int32.Parse(ConnectionSpeedSelectTextBox.Text);
                 try
                 {
                     serialPort1.Open();
-                    OpenCloseConnectionButton.Text = "Close";
+                    IsConnected = true;
                 }
-                catch (UnauthorizedAccessException)
+                catch (UnauthorizedAccessException error)
                 {
-                    OpenCloseConnectionButton.Text = "Port is busy";
+                    MessageBox.Show(this, "Выбранный порт занят другим приложением", "Ошибка открытия порта",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                catch
+                catch (Exception error)
                 {
-                    OpenCloseConnectionButton.Text = "Error";
+                    MessageBox.Show(this, error.Message, "Ошибка открытия порта",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             else
-            {
+            {// Закрытие порта
                 try
                 {
                     serialPort1.Close();
-                    OpenCloseConnectionButton.Text = "Open";
+                    IsConnected = false;
                 }
-                catch
+                catch (Exception error)
                 {
-                    OpenCloseConnectionButton.Text = "Error";
+                    MessageBox.Show(this, error.Message, "Ошибка закрытия порта",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void ConnectionSpeedSelectTextBox_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            char tmp = e.KeyChar;
+
+            if ((!Char.IsDigit(tmp)) && (!Char.IsControl(tmp)))
+            {
+                e.KeyChar = '\0';
             }
         }
         #endregion
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (serialPort1.IsOpen)
+            if (IsConnected)
             {
                 if (serialPort1.BytesToRead > 0)
                 {
@@ -299,16 +335,6 @@ namespace ECG_Viewer
         {
             //ppsTextBox.Text = pps_cnt.ToString();
             pps_cnt = 0;
-        }
-
-        private void ConnectionSpeedSelectTextBox_KeyPress_1(object sender, KeyPressEventArgs e)
-        {
-            char tmp = e.KeyChar;
-
-            if ((!Char.IsDigit(tmp)) && (!Char.IsControl(tmp)))
-            {
-                e.KeyChar = '\0';
-            }
         }
 
         private double GetK_Ch1()
