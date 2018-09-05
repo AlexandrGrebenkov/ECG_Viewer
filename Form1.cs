@@ -403,19 +403,19 @@ namespace ECG_Viewer
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            Size pbs = SystemInformation.PrimaryMonitorSize;
+            /*Size pbs = SystemInformation.PrimaryMonitorSize;
             //Size pbs = Form1.ActiveForm.ClientSize;
             pbs.Height -= 30 + System.Windows.Forms.SystemInformation.CaptionHeight + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
             pbs.Width -= 155 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
-            chart1.Size = pbs;
+            chart1.Size = pbs;*/
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Size pbs = Form1.ActiveForm.ClientSize;
+            /*Size pbs = Form1.ActiveForm.ClientSize;
             pbs.Height -= 30 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
             pbs.Width -= 155 + 2 * System.Windows.Forms.SystemInformation.BorderSize.Width;
-            chart1.Size = pbs;
+            chart1.Size = pbs;*/
         } 
         
     }
