@@ -43,6 +43,13 @@ namespace ECG_Viewer
 
         const int ADCmax = 0xB96400;//0xC35000;//
 
+        public event Action Exit;
+        public event Action SaveRecord;
+        public event Action LoadRecord;
+        public event Action Clear;
+        public event Action ConnectToDevice;
+        public event Action RefreshPorts;
+
         /// <summary>Состояние последовательного порта</summary>
         public bool IsConnected
         {
@@ -89,18 +96,11 @@ namespace ECG_Viewer
             timer2.Start();
         }
 
-        private void ExitButton_Click(object sender, EventArgs e)
-        {
-            Serial.Disconnect();
-            this.Close();
-        }
+        private void ExitButton_Click(object sender, EventArgs e) => Exit?.Invoke();
 
         #region Serial Port
 
-        private void RefreshPortsButton_Click(object sender, EventArgs e)
-        {
-            AvailablePorts = Serial.AvailablePorts;
-        }
+        private void RefreshPortsButton_Click(object sender, EventArgs e) => RefreshPorts?.Invoke();
 
         /// <summary>Открыть/Закрыть порт</summary>
         private void OpenCloseConnectionButton_Click(object sender, EventArgs e)
@@ -383,6 +383,11 @@ namespace ECG_Viewer
         public new void Show()
         {
             Application.Run(this);
+        }
+
+        public void ErrorHandler(string title, string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,5 +11,13 @@ namespace ECG_Viewer.Views
         string ComPort { get; }
         int BaudRate { get; }
         IEnumerable<string> AvailablePorts { get; set; }
+
+        event Action Exit;
+        event Action SaveRecord;
+        event Action LoadRecord;
+        event Action Clear;
+
+        event Action ConnectToDevice;
+        event Action RefreshPorts;
     }
 }

@@ -19,6 +19,35 @@ namespace ECG_Viewer.Presenters
             Serial = serial;
             View = view;
             FileWorker = fileWorker;
+
+            View.AvailablePorts = Serial.AvailablePorts;
+            View.RefreshPorts += () => View.AvailablePorts = Serial.AvailablePorts;
+
+            View.Exit += () =>
+            {
+                Serial.Disconnect(error => View.ErrorHandler("Ошибка закрытия порта", error));
+                View.Close();
+            };
+
+            View.Clear += () =>
+            {
+
+            };
+
+            View.ConnectToDevice += () =>
+            {
+
+            };
+
+            View.LoadRecord += () =>
+            {
+
+            };
+
+            View.SaveRecord += () =>
+            {
+
+            };
         }
 
         public void Run()
