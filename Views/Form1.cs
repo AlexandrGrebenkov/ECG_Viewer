@@ -5,10 +5,11 @@ using System.Windows.Forms;
 using ECG_Viewer.Service;
 using ECG_Viewer.Models;
 using ECG_Viewer.Service.Serial;
+using ECG_Viewer.Views;
 
 namespace ECG_Viewer
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IMainView
     {
         ISerial Serial = new Serial();
         int point_counter = 0;
