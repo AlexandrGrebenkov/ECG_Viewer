@@ -12,5 +12,8 @@ namespace ECG_Viewer.Service.Serial
         void Disconnect(Action<string> ErrorHandler = null);
 
         event Action<bool> ConnectionChanged;
+
+        bool HasNewData { get; }
+        byte[] ReadData();
     }
 }

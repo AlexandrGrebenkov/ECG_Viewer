@@ -12,6 +12,8 @@ namespace ECG_Viewer.Service.Serial
 
         public IEnumerable<string> AvailablePorts => SerialPort.GetPortNames();
 
+        public bool HasNewData => Port.BytesToRead > 0;
+
         public event Action<bool> ConnectionChanged;
 
         public void Connect(string portName, int baudRate, Action<string> ErrorHandler = null)
@@ -50,6 +52,20 @@ namespace ECG_Viewer.Service.Serial
             {
                 ConnectionChanged?.Invoke(IsConnected);
             }
+        }
+
+        public byte[] ReadData()
+        {
+            var rx_buff = Port.BytesToRead >= 9 ? new byte[Port.BytesToRead] : new byte[9];
+            int i = 0;
+            while (i < rx_buff.Length)//(i < 3)//
+            {
+                int RxByte = Port.ReadByte();
+                if (RxByte >= 0)
+                    rx_buff[i++] = (byte)RxByte;
+                else break;
+            }
+            return rx_buff;
         }
     }
 }
