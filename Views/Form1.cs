@@ -380,5 +380,9 @@ namespace ECG_Viewer
         }
         #endregion
 
+        public new void Show()
+        {
+            Application.Run(this);
+        }
     }
 }

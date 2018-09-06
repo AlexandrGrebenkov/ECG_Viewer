@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filtr.cs" />
+    <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Service\Serial\ISerial.cs" />
     <Compile Include="Service\Serial\Serial.cs" />
     <Compile Include="Views\Form1.cs">
@@ -94,6 +95,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\FileWorker.cs" />
     <Compile Include="Service\IFileWorker.cs" />
+    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IView.cs" />
     <EmbeddedResource Include="Views\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
