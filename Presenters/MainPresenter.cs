@@ -47,8 +47,8 @@ namespace ECG_Viewer.Presenters
 
             View.Clear += () =>
             {
-
-            };            
+                View.ClearDataPoints();
+            };
 
             View.LoadRecord += () =>
             {

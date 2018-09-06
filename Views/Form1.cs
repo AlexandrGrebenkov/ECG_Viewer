@@ -87,8 +87,6 @@ namespace ECG_Viewer
         {
             InitializeComponent();
 
-            
-            AvailablePorts = Serial.AvailablePorts;
             comboBox1.Items.AddRange(new object[] { "Off", "x2", "x4", "x6", "x8" });
             comboBox1.SelectedIndex = 0;
 
@@ -195,13 +193,7 @@ namespace ECG_Viewer
                             chart1.ChartAreas[0].AxisY.Minimum = -1;
                         }
                     }
-                    data_Ch1.Clear();
-                    data_Ch2.Clear();
-                    SmoothDataCh1.Clear();
-                    SmoothDataCh2.Clear();
-                    (chart1.Series[0]).Points.Clear();
-                    (chart1.Series[1]).Points.Clear();
-                    t_double = 0;
+                    ClearDataPoints();
                 }
 
                 foreach (int index in indexes)
@@ -285,14 +277,7 @@ namespace ECG_Viewer
 
         }
 
-        private void ClearScreenButton_Click(object sender, EventArgs e)
-        {
-            data_Ch1.Clear();
-            data_Ch2.Clear();
-            (chart1.Series[0]).Points.Clear();
-            (chart1.Series[1]).Points.Clear();
-            t_double = 0;
-        }
+        private void ClearScreenButton_Click(object sender, EventArgs e) => Clear?.Invoke();
 
         private void timer2_Tick(object sender, EventArgs e)
         {
@@ -375,6 +360,23 @@ namespace ECG_Viewer
         {
             MessageBox.Show(this, message, title,
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void AddNewDataPoints(double ch1, double ch2, double t)
+        {
+            chart1.Series[0].Points.AddXY(t, ch1);
+            chart1.Series[1].Points.AddXY(t, ch2);
+        }
+
+        public void ClearDataPoints()
+        {
+            data_Ch1.Clear();
+            data_Ch2.Clear();
+            SmoothDataCh1.Clear();
+            SmoothDataCh2.Clear();
+            chart1.Series[0].Points.Clear();
+            chart1.Series[1].Points.Clear();
+            t_double = 0;
         }
     }
 }
