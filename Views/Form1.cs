@@ -87,7 +87,7 @@ namespace ECG_Viewer
         {
             InitializeComponent();
 
-            Serial.ConnectionChanged += state => IsConnected = state;
+            
             AvailablePorts = Serial.AvailablePorts;
             comboBox1.Items.AddRange(new object[] { "Off", "x2", "x4", "x6", "x8" });
             comboBox1.SelectedIndex = 0;
@@ -103,21 +103,7 @@ namespace ECG_Viewer
         private void RefreshPortsButton_Click(object sender, EventArgs e) => RefreshPorts?.Invoke();
 
         /// <summary>Открыть/Закрыть порт</summary>
-        private void OpenCloseConnectionButton_Click(object sender, EventArgs e)
-        {
-            if (!Serial.IsConnected)
-            {// Открытие порта
-                Serial.Connect(ComPort, BaudRate,
-                    error => MessageBox.Show(this, error, "Ошибка открытия порта",
-                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
-            }
-            else
-            {// Закрытие порта
-                Serial.Disconnect(
-                    error => MessageBox.Show(this, error, "Ошибка закрытия порта",
-                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
-            }
-        }
+        private void OpenCloseConnectionButton_Click(object sender, EventArgs e) => ConnectToDevice?.Invoke();
 
         private void ConnectionSpeedSelectTextBox_KeyPress_1(object sender, KeyPressEventArgs e)
         {
@@ -387,7 +373,8 @@ namespace ECG_Viewer
 
         public void ErrorHandler(string title, string message)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(this, message, title,
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

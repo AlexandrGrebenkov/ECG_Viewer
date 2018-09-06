@@ -1,4 +1,5 @@
-﻿using ECG_Viewer.Service;
+﻿using ECG_Viewer.Models;
+using ECG_Viewer.Service;
 using ECG_Viewer.Service.Serial;
 using ECG_Viewer.Views;
 using System;
@@ -23,6 +24,21 @@ namespace ECG_Viewer.Presenters
             View.AvailablePorts = Serial.AvailablePorts;
             View.RefreshPorts += () => View.AvailablePorts = Serial.AvailablePorts;
 
+            View.ConnectToDevice += () =>
+            {
+                if (!Serial.IsConnected)
+                {// Открытие порта
+                    Serial.Connect(View.ComPort, View.BaudRate,
+                        error => View.ErrorHandler("Ошибка открытия порта", error));
+                }
+                else
+                {// Закрытие порта
+                    Serial.Disconnect(
+                        error => View.ErrorHandler("Ошибка закрытия порта", error));
+                }
+            };
+            Serial.ConnectionChanged += state => View.IsConnected = state;
+
             View.Exit += () =>
             {
                 Serial.Disconnect(error => View.ErrorHandler("Ошибка закрытия порта", error));
@@ -32,12 +48,7 @@ namespace ECG_Viewer.Presenters
             View.Clear += () =>
             {
 
-            };
-
-            View.ConnectToDevice += () =>
-            {
-
-            };
+            };            
 
             View.LoadRecord += () =>
             {
