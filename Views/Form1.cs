@@ -63,6 +63,17 @@ namespace ECG_Viewer
             get => serialPort1.IsOpen;
         }
 
+        /// <summary>Выбранный COM-порт</summary>
+        public string ComPort => SelectPortCBox.Text;
+        /// <summary>Скорость обмена по COM-Порту</summary>
+        public int BaudRate => Int32.Parse(ConnectionSpeedSelectTextBox.Text);
+        /// <summary>Доступные COM-Порты</summary>
+        public IEnumerable<string> AvailablePorts
+        {
+            get => (IEnumerable<string>)SelectPortCBox.DataSource;
+            set => SelectPortCBox.DataSource = value;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -101,8 +112,8 @@ namespace ECG_Viewer
         {
             if (!IsConnected)
             {// Открытие порта
-                serialPort1.PortName = SelectPortCBox.Text;
-                serialPort1.BaudRate = Int32.Parse(ConnectionSpeedSelectTextBox.Text);
+                serialPort1.PortName = ComPort;
+                serialPort1.BaudRate = BaudRate;
                 try
                 {
                     serialPort1.Open();
@@ -274,8 +285,8 @@ namespace ECG_Viewer
                             yCh1 = AFiltrCh1_50_Hz.Calc(yCh1);
                             yCh2 = AFiltrCh2_50_Hz.Calc(yCh2);
                         }
-                        yCh1 *= GetK_Ch1();
-                        yCh2 *= GetK_Ch2();
+                        yCh1 *= K_Ch1;
+                        yCh2 *= K_Ch2;
 
                         data_Ch1.Add(yCh1);
                         data_Ch2.Add(yCh2);
@@ -337,34 +348,40 @@ namespace ECG_Viewer
             pps_cnt = 0;
         }
 
-        private double GetK_Ch1()
+        public double K_Ch1
         {
+            get
+            {
 
-            double tmp = new double();
-            try
-            {
-                tmp = double.Parse(K_Ch1_TextBox.Text);
-                return tmp;
-            }
-            catch
-            {
-                K_Ch1_TextBox.Text = "1371.4285714285714285714285714286";
-                return 1.0d;
+                double tmp = new double();
+                try
+                {
+                    tmp = double.Parse(K_Ch1_TextBox.Text);
+                    return tmp;
+                }
+                catch
+                {
+                    K_Ch1_TextBox.Text = "1371.4285714285714285714285714286";
+                    return 1.0d;
+                }
             }
         }
 
-        private double GetK_Ch2()
+        public double K_Ch2
         {
-            double tmp = new double();
-            try
+            get
             {
-                tmp = double.Parse(K_Ch2_TextBox.Text);
-                return tmp;
-            }
-            catch
-            {
-                K_Ch2_TextBox.Text = "1371.4285714285714285714285714286";
-                return 1.0d;
+                double tmp = new double();
+                try
+                {
+                    tmp = double.Parse(K_Ch2_TextBox.Text);
+                    return tmp;
+                }
+                catch
+                {
+                    K_Ch2_TextBox.Text = "1371.4285714285714285714285714286";
+                    return 1.0d;
+                }
             }
         }
 
