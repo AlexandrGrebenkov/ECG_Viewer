@@ -63,6 +63,17 @@ namespace ECG_Viewer
             get => serialPort1.IsOpen;
         }
 
+        /// <summary>Выбранный COM-порт</summary>
+        public string ComPort => SelectPortCBox.Text;
+        /// <summary>Скорость обмена по COM-Порту</summary>
+        public int BaudRate => Int32.Parse(ConnectionSpeedSelectTextBox.Text);
+        /// <summary>Доступные COM-Порты</summary>
+        public IEnumerable<string> AvailablePorts
+        {
+            get => (IEnumerable<string>)SelectPortCBox.DataSource;
+            set => SelectPortCBox.DataSource = value;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -101,8 +112,8 @@ namespace ECG_Viewer
         {
             if (!IsConnected)
             {// Открытие порта
-                serialPort1.PortName = SelectPortCBox.Text;
-                serialPort1.BaudRate = Int32.Parse(ConnectionSpeedSelectTextBox.Text);
+                serialPort1.PortName = ComPort;
+                serialPort1.BaudRate = BaudRate;
                 try
                 {
                     serialPort1.Open();
