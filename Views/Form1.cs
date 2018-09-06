@@ -4,11 +4,13 @@ using System.Linq;
 using System.Windows.Forms;
 using ECG_Viewer.Service;
 using ECG_Viewer.Models;
+using ECG_Viewer.Service.Serial;
 
 namespace ECG_Viewer
 {
     public partial class Form1 : Form
     {
+        ISerial Serial = new Serial();
         int point_counter = 0;
         int pps_cnt = 0;
 
@@ -60,7 +62,6 @@ namespace ECG_Viewer
                     RefreshPortsButton.Enabled = true;
                 }
             }
-            get => serialPort1.IsOpen;
         }
 
         /// <summary>Выбранный COM-порт</summary>
@@ -77,7 +78,9 @@ namespace ECG_Viewer
         public Form1()
         {
             InitializeComponent();
-            SelectPortCBox.DataSource = System.IO.Ports.SerialPort.GetPortNames();
+
+            Serial.ConnectionChanged += state => IsConnected = state;
+            AvailablePorts = Serial.AvailablePorts;
             comboBox1.Items.AddRange(new object[] { "Off", "x2", "x4", "x6", "x8" });
             comboBox1.SelectedIndex = 0;
 
@@ -87,16 +90,7 @@ namespace ECG_Viewer
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            if (IsConnected)
-            {
-                try
-                {
-                    serialPort1.Close();
-                }
-                catch
-                {
-                }
-            }
+            Serial.Disconnect();
             this.Close();
         }
 
@@ -104,44 +98,23 @@ namespace ECG_Viewer
 
         private void RefreshPortsButton_Click(object sender, EventArgs e)
         {
-            SelectPortCBox.DataSource = System.IO.Ports.SerialPort.GetPortNames();
+            AvailablePorts = Serial.AvailablePorts;
         }
 
         /// <summary>Открыть/Закрыть порт</summary>
         private void OpenCloseConnectionButton_Click(object sender, EventArgs e)
         {
-            if (!IsConnected)
+            if (!Serial.IsConnected)
             {// Открытие порта
-                serialPort1.PortName = ComPort;
-                serialPort1.BaudRate = BaudRate;
-                try
-                {
-                    serialPort1.Open();
-                    IsConnected = true;
-                }
-                catch (UnauthorizedAccessException error)
-                {
-                    MessageBox.Show(this, "Выбранный порт занят другим приложением", "Ошибка открытия порта",
-                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(this, error.Message, "Ошибка открытия порта",
-                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Serial.Connect(ComPort, BaudRate,
+                    error => MessageBox.Show(this, error, "Ошибка открытия порта",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
             }
             else
             {// Закрытие порта
-                try
-                {
-                    serialPort1.Close();
-                    IsConnected = false;
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(this, error.Message, "Ошибка закрытия порта",
-                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Serial.Disconnect(
+                    error => MessageBox.Show(this, error, "Ошибка закрытия порта",
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
             }
         }
 
@@ -158,7 +131,7 @@ namespace ECG_Viewer
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (IsConnected)
+            if (Serial.IsConnected)
             {
                 if (serialPort1.BytesToRead > 0)
                 {

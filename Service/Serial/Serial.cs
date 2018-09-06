@@ -12,6 +12,8 @@ namespace ECG_Viewer.Service.Serial
 
         public IEnumerable<string> AvailablePorts => SerialPort.GetPortNames();
 
+        public event Action<bool> ConnectionChanged;
+
         public void Connect(string portName, int baudRate, Action<string> ErrorHandler = null)
         {
             Port.PortName = portName;
@@ -28,6 +30,10 @@ namespace ECG_Viewer.Service.Serial
             {
                 ErrorHandler?.Invoke(error.Message);
             }
+            finally
+            {
+                ConnectionChanged?.Invoke(IsConnected);
+            }
         }
 
         public void Disconnect(Action<string> ErrorHandler = null)
@@ -39,6 +45,10 @@ namespace ECG_Viewer.Service.Serial
             catch (Exception error)
             {
                 ErrorHandler?.Invoke(error.Message);
+            }
+            finally
+            {
+                ConnectionChanged?.Invoke(IsConnected);
             }
         }
     }
