@@ -1,8 +1,6 @@
 ﻿using ECG_Viewer.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ECG_Viewer.Views
 {
@@ -36,5 +34,8 @@ namespace ECG_Viewer.Views
 
         event Action StartRecord;
         event Action StopRecord;
+
+        double K_Ch1 { get; }
+        double K_Ch2 { get; }
     }
 }
