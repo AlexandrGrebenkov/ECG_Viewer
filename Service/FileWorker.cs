@@ -69,16 +69,16 @@ namespace ECG_Viewer.Service
                     using (var fs = new FileStream(dialog.FileName, FileMode.Open, FileAccess.Read))
                     using (var reader = new BinaryReader(fs))
                     {
-                        /*record = new Record();
+                        record = new Record();
                         int sizeCh1 = reader.ReadInt32();
-                        record.Ch1 = new List<double>();
+                        record.Ch1 = new double[sizeCh1];
                         for (int i = 0; i < sizeCh1; i++)
-                            record.Ch1.Add(reader.ReadDouble());
+                            record.Ch1[i] = reader.ReadDouble();
 
                         int sizeCh2 = reader.ReadInt32();
-                        record.Ch2 = new List<double>();
+                        record.Ch2 = new double[sizeCh2];
                         for (int i = 0; i < sizeCh2; i++)
-                            record.Ch2.Add(reader.ReadDouble());*/
+                            record.Ch2[i] = reader.ReadDouble();
                     }
                 }
                 catch (Exception ex)
