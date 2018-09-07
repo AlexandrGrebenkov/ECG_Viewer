@@ -90,8 +90,10 @@ namespace ECG_Viewer
             comboBox1.Items.AddRange(new object[] { "Off", "x2", "x4", "x6", "x8" });
             comboBox1.SelectedIndex = 0;
 
-            timer1.Start();
-            timer2.Start();
+            chart1.ChartAreas[0].AxisX.Maximum = 200;
+
+            //timer1.Start();
+            //timer2.Start();
         }
 
         private void ExitButton_Click(object sender, EventArgs e) => Exit?.Invoke();
@@ -193,7 +195,6 @@ namespace ECG_Viewer
                             chart1.ChartAreas[0].AxisY.Minimum = -1;
                         }
                     }
-                    ClearDataPoints();
                 }
 
                 foreach (int index in indexes)
@@ -281,7 +282,6 @@ namespace ECG_Viewer
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            //ppsTextBox.Text = pps_cnt.ToString();
             pps_cnt = 0;
         }
 
@@ -324,31 +324,10 @@ namespace ECG_Viewer
 
         #region Работа с файлами
         /// <summary>Кнопка открытия файла</summary>
-        private void LoadButton_Click(object sender, EventArgs e)
-        {
-            var FileWorker = new FileWorker();
-
-            var record = FileWorker.LoadRecord(
-                error => MessageBox.Show(this, error, "Ошибка открытия файла",
-                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
-
-            if (record == null) return;
-
-            data_Ch1 = record.Ch1; //Данные прочитали, но график сейчас не обновится
-            data_Ch2 = record.Ch2;
-        }
+        private void LoadButton_Click(object sender, EventArgs e) => LoadRecord?.Invoke();
 
         /// <summary>Кнопка сохранения файла</summary>
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            var FileWorker = new FileWorker();
-
-            var record = new Record() { Ch1 = data_Ch1, Ch2 = data_Ch2 };
-
-            FileWorker.SaveSeries(record,
-                error => MessageBox.Show(this, error, "Ошибка сохранения файла",
-                                         MessageBoxButtons.OK, MessageBoxIcon.Error));
-        }
+        private void SaveButton_Click(object sender, EventArgs e) => SaveRecord?.Invoke();
         #endregion
 
         public new void Show()
@@ -362,21 +341,11 @@ namespace ECG_Viewer
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public void AddNewDataPoints(double ch1, double ch2, double t)
+        public void UpdateChart(Record record)
         {
-            chart1.Series[0].Points.AddXY(t, ch1);
-            chart1.Series[1].Points.AddXY(t, ch2);
-        }
-
-        public void ClearDataPoints()
-        {
-            data_Ch1.Clear();
-            data_Ch2.Clear();
-            SmoothDataCh1.Clear();
-            SmoothDataCh2.Clear();
-            chart1.Series[0].Points.Clear();
-            chart1.Series[1].Points.Clear();
-            t_double = 0;
+            chart1.Series[0].Points.DataBindY(record.Ch1);
+            chart1.Series[1].Points.DataBindY(record.Ch2);
+            chart1.DataBind();
         }
     }
 }

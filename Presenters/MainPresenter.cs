@@ -15,11 +15,17 @@ namespace ECG_Viewer.Presenters
         IMainView View;
         IFileWorker FileWorker;
 
+        Record Record;
+
         public MainPresenter(ISerial serial, IMainView view, IFileWorker fileWorker)
         {
             Serial = serial;
             View = view;
             FileWorker = fileWorker;
+
+            Record = new Record();
+            Record.Ch1 = new double[200];
+            Record.Ch2 = new double[200];
 
             View.AvailablePorts = Serial.AvailablePorts;
             View.RefreshPorts += () => View.AvailablePorts = Serial.AvailablePorts;
@@ -45,19 +51,17 @@ namespace ECG_Viewer.Presenters
                 View.Close();
             };
 
-            View.Clear += () =>
-            {
-                View.ClearDataPoints();
-            };
-
             View.LoadRecord += () =>
             {
-
+                Record = FileWorker.LoadRecord(
+                    error => View.ErrorHandler("Ошибка открытия файла", error));
+                View.UpdateChart(Record);
             };
 
             View.SaveRecord += () =>
             {
-
+                FileWorker.SaveSeries(Record,
+                    error => View.ErrorHandler("Ошибка сохранения файла", error));
             };
         }
 

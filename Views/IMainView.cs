@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECG_Viewer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,17 +23,12 @@ namespace ECG_Viewer.Views
         event Action SaveRecord;
         /// <summary></summary>
         event Action LoadRecord;
-        /// <summary></summary>
-        event Action Clear;
 
         /// <summary></summary>
         event Action ConnectToDevice;
         /// <summary></summary>
         event Action RefreshPorts;
 
-        /// <summary></summary>
-        void AddNewDataPoints(double ch1, double ch2, double t);
-        /// <summary></summary>
-        void ClearDataPoints();
+        void UpdateChart(Record record);
     }
 }
