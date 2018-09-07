@@ -30,5 +30,11 @@ namespace ECG_Viewer.Views
         event Action RefreshPorts;
 
         void UpdateChart(Record record);
+
+        /// <summary>Время записи</summary>
+        double RecordDuration { get; }
+
+        event Action StartRecord;
+        event Action StopRecord;
     }
 }

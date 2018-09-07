@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace ECG_Viewer.Presenters
 {
@@ -17,6 +18,9 @@ namespace ECG_Viewer.Presenters
 
         Record Record;
 
+        /// <summary>Время дискретизации в секундах</summary>
+        double TimeStep = 0.050;
+
         public MainPresenter(ISerial serial, IMainView view, IFileWorker fileWorker)
         {
             Serial = serial;
@@ -24,8 +28,23 @@ namespace ECG_Viewer.Presenters
             FileWorker = fileWorker;
 
             Record = new Record();
-            Record.Ch1 = new double[200];
-            Record.Ch2 = new double[200];
+
+            int counter = 0;
+            var timer = new Timer();
+            timer.Interval = (int)(TimeStep*1000);
+            timer.Tick += (sender, args) =>
+            {
+                counter++;
+                for (int i = 0; i < Record.Ch1.Length - 1; i++)
+                {
+                    Record.Ch1[i] = Record.Ch1[i + 1];
+                    Record.Ch2[i] = Record.Ch2[i + 1];
+                }
+                Record.Ch1[Record.Ch1.Length - 1] = Math.Sin(counter * 4 * Math.PI / Record.Ch1.Length);
+                Record.Ch2[Record.Ch1.Length - 1] = Math.Cos(counter * 4 * Math.PI / Record.Ch1.Length);
+                View.UpdateChart(Record);
+            };
+            
 
             View.AvailablePorts = Serial.AvailablePorts;
             View.RefreshPorts += () => View.AvailablePorts = Serial.AvailablePorts;
@@ -63,6 +82,16 @@ namespace ECG_Viewer.Presenters
                 FileWorker.SaveSeries(Record,
                     error => View.ErrorHandler("Ошибка сохранения файла", error));
             };
+
+            View.StartRecord += () =>
+            {
+                var T = View.RecordDuration;
+                Record.Ch1 = new double[(int)(T / TimeStep)];
+                Record.Ch2 = new double[(int)(T / TimeStep)];
+                timer.Start();
+            };
+
+            View.StopRecord += () => timer.Stop();
         }
 
         public void Run()

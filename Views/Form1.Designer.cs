@@ -33,6 +33,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.MinYTextBox = new System.Windows.Forms.TextBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.MaxYTextBox = new System.Windows.Forms.TextBox();
@@ -70,6 +71,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnStart = new System.Windows.Forms.ToolStripButton();
+            this.btnStop = new System.Windows.Forms.ToolStripButton();
+            this.tbRecordDuration = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -79,6 +84,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MinYTextBox
@@ -107,7 +113,7 @@
             // 
             this.ClearScreenButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearScreenButton.Location = new System.Drawing.Point(46, 526);
+            this.ClearScreenButton.Location = new System.Drawing.Point(46, 501);
             this.ClearScreenButton.Name = "ClearScreenButton";
             this.ClearScreenButton.Size = new System.Drawing.Size(113, 25);
             this.ClearScreenButton.TabIndex = 269;
@@ -163,7 +169,7 @@
             this.ExitButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ExitButton.Location = new System.Drawing.Point(46, 555);
+            this.ExitButton.Location = new System.Drawing.Point(46, 530);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(113, 25);
             this.ExitButton.TabIndex = 268;
@@ -175,7 +181,7 @@
             // 
             this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveButton.Location = new System.Drawing.Point(46, 497);
+            this.SaveButton.Location = new System.Drawing.Point(46, 472);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(113, 25);
             this.SaveButton.TabIndex = 277;
@@ -254,7 +260,7 @@
             series2.Name = "Ch2";
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(596, 600);
+            this.chart1.Size = new System.Drawing.Size(596, 575);
             this.chart1.TabIndex = 284;
             this.chart1.Text = "chart1";
             // 
@@ -390,7 +396,7 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -407,7 +413,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.chart1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 600);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 575);
             this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 295;
             // 
@@ -415,7 +421,7 @@
             // 
             this.LoadButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoadButton.Location = new System.Drawing.Point(46, 468);
+            this.LoadButton.Location = new System.Drawing.Point(46, 443);
             this.LoadButton.Name = "LoadButton";
             this.LoadButton.Size = new System.Drawing.Size(113, 25);
             this.LoadButton.TabIndex = 299;
@@ -502,12 +508,51 @@
             this.label11.TabIndex = 267;
             this.label11.Text = "Порт:";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnStart,
+            this.btnStop,
+            this.tbRecordDuration});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.TabIndex = 296;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnStart
+            // 
+            this.btnStart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnStart.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Image")));
+            this.btnStart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(23, 22);
+            this.btnStart.Text = "Start";
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnStop.Image = ((System.Drawing.Image)(resources.GetObject("btnStop.Image")));
+            this.btnStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(23, 22);
+            this.btnStop.Text = "Stop";
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // tbRecordDuration
+            // 
+            this.tbRecordDuration.Name = "tbRecordDuration";
+            this.tbRecordDuration.Size = new System.Drawing.Size(40, 25);
+            this.tbRecordDuration.Text = "5";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ECG_Viewer";
@@ -524,7 +569,10 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -567,6 +615,10 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button LoadButton;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnStart;
+        private System.Windows.Forms.ToolStripButton btnStop;
+        private System.Windows.Forms.ToolStripTextBox tbRecordDuration;
     }
 }
 

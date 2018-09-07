@@ -49,6 +49,8 @@ namespace ECG_Viewer
         public event Action Clear;
         public event Action ConnectToDevice;
         public event Action RefreshPorts;
+        public event Action StartRecord;
+        public event Action StopRecord;
 
         /// <summary>Состояние последовательного порта</summary>
         public bool IsConnected
@@ -90,7 +92,7 @@ namespace ECG_Viewer
             comboBox1.Items.AddRange(new object[] { "Off", "x2", "x4", "x6", "x8" });
             comboBox1.SelectedIndex = 0;
 
-            chart1.ChartAreas[0].AxisX.Maximum = 200;
+            
 
             //timer1.Start();
             //timer2.Start();
@@ -322,6 +324,8 @@ namespace ECG_Viewer
             }
         }
 
+        public double RecordDuration => double.Parse(tbRecordDuration.Text);
+
         #region Работа с файлами
         /// <summary>Кнопка открытия файла</summary>
         private void LoadButton_Click(object sender, EventArgs e) => LoadRecord?.Invoke();
@@ -343,9 +347,14 @@ namespace ECG_Viewer
 
         public void UpdateChart(Record record)
         {
+            chart1.ChartAreas[0].AxisX.Maximum = record.Ch1.Length;
             chart1.Series[0].Points.DataBindY(record.Ch1);
             chart1.Series[1].Points.DataBindY(record.Ch2);
             chart1.DataBind();
         }
+
+        private void btnStart_Click(object sender, EventArgs e) => StartRecord?.Invoke();
+
+        private void btnStop_Click(object sender, EventArgs e) => StopRecord?.Invoke();
     }
 }
