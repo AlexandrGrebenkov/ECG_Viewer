@@ -92,7 +92,7 @@ namespace ECG_Viewer
             comboBox1.Items.AddRange(new object[] { "Off", "x2", "x4", "x6", "x8" });
             comboBox1.SelectedIndex = 0;
 
-            
+
 
             //timer1.Start();
             //timer2.Start();
@@ -326,14 +326,6 @@ namespace ECG_Viewer
 
         public double RecordDuration => double.Parse(tbRecordDuration.Text);
 
-        #region Работа с файлами
-        /// <summary>Кнопка открытия файла</summary>
-        private void LoadButton_Click(object sender, EventArgs e) => LoadRecord?.Invoke();
-
-        /// <summary>Кнопка сохранения файла</summary>
-        private void SaveButton_Click(object sender, EventArgs e) => SaveRecord?.Invoke();
-        #endregion
-
         public new void Show()
         {
             Application.Run(this);
@@ -356,5 +348,12 @@ namespace ECG_Viewer
         private void btnStart_Click(object sender, EventArgs e) => StartRecord?.Invoke();
 
         private void btnStop_Click(object sender, EventArgs e) => StopRecord?.Invoke();
+
+        #region Работа с файлами
+        /// <summary>Кнопка открытия файла</summary>
+        private void btnOpen_Click(object sender, EventArgs e) => LoadRecord?.Invoke();
+        /// <summary>Кнопка сохранения файла</summary>
+        private void btnSave_Click(object sender, EventArgs e) => SaveRecord?.Invoke();
+        #endregion
     }
 }
