@@ -4,6 +4,9 @@ using System.IO.Ports;
 
 namespace ECG_Viewer.Service.Serial
 {
+    /// <summary>
+    /// Класс работы с последовательным портом
+    /// </summary>
     public class Serial : ISerial
     {
         SerialPort Port = new SerialPort();

@@ -3,6 +3,9 @@ using ECG_Viewer.Models;
 
 namespace ECG_Viewer.Service
 {
+    /// <summary>
+    /// Интерфейс для работы с файловой системой
+    /// </summary>
     public interface IFileWorker
     {
         /// <summary>

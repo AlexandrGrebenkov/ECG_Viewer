@@ -5,7 +5,6 @@ using ECG_Viewer.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ECG_Viewer.Presenters
@@ -94,6 +93,9 @@ namespace ECG_Viewer.Presenters
             View.StopRecord += () => timer.Stop();
         }
 
+        /// <summary>
+        /// Метод запускает форму
+        /// </summary>
         public void Run()
         {
             View.Show();
