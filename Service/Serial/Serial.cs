@@ -76,5 +76,10 @@ namespace ECG_Viewer.Service.Serial
             }
             return rx_buff;
         }
+
+        public void WriteData(byte[] data)
+        {
+            Port.Write(data, 0, data.Length);
+        }
     }
 }
