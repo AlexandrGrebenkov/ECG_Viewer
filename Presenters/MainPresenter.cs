@@ -71,8 +71,10 @@ namespace ECG_Viewer.Presenters
 
             View.LoadRecord += () =>
             {
-                Record = FileWorker.LoadRecord(
+                var record = FileWorker.LoadRecord(
                     error => View.ErrorHandler("Ошибка открытия файла", error));
+                if (record == null) return;
+                Record = record;
                 View.UpdateChart(Record);
             };
 
