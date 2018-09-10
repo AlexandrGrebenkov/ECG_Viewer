@@ -14,6 +14,7 @@ namespace ECG_Viewer.Presenters
         ISerial Serial;
         IMainView View;
         IFileWorker FileWorker;
+        Requests Requests;
 
         Record Record;
 
@@ -28,12 +29,13 @@ namespace ECG_Viewer.Presenters
             View = view;
             FileWorker = fileWorker;
 
+            Requests = new Requests(Serial);
             Record = new Record();
 
             #region Serial Port
             int counter = 0;
             var timer = new Timer();
-            timer.Interval = (int)(TimeStep*1000);
+            timer.Interval = (int)(TimeStep * 1000);
             timer.Tick += (sender, args) =>
             {
                 var Ch1Packs = new List<double>();
@@ -58,7 +60,6 @@ namespace ECG_Viewer.Presenters
 
                 View.UpdateChart(Record);
             };
-            
 
             View.AvailablePorts = Serial.AvailablePorts;
             View.RefreshPorts += () => View.AvailablePorts = Serial.AvailablePorts;
@@ -106,10 +107,15 @@ namespace ECG_Viewer.Presenters
                 Record.Ch1 = new double[(int)(T * Fd)];
                 Record.Ch2 = new double[(int)(T * Fd)];
                 Serial.FlushRxBuffer();
+                Requests.StartMeasure();
                 timer.Start();
             };
 
-            View.StopRecord += () => timer.Stop();
+            View.StopRecord += () =>
+            {
+                Requests.StopMeasure();
+                timer.Stop();
+            };
         }
 
         /// <summary>
