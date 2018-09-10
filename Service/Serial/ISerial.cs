@@ -29,5 +29,8 @@ namespace ECG_Viewer.Service.Serial
         bool HasNewData { get; }
         /// <summary>Чтение данных из порта</summary>
         byte[] ReadData();
+
+        /// <summary>Очистка буфера</summary>
+        void FlushRxBuffer();
     }
 }

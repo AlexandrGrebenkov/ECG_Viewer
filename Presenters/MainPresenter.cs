@@ -87,6 +87,7 @@ namespace ECG_Viewer.Presenters
                 var T = View.RecordDuration;
                 Record.Ch1 = new double[(int)(T / TimeStep)];
                 Record.Ch2 = new double[(int)(T / TimeStep)];
+                Serial.FlushRxBuffer();
                 timer.Start();
             };
 

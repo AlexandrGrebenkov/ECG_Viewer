@@ -57,6 +57,12 @@ namespace ECG_Viewer.Service.Serial
             }
         }
 
+        public void FlushRxBuffer()
+        {
+            if (!IsConnected) return;
+            Port.DiscardInBuffer();
+        }
+
         public byte[] ReadData()
         {
             var rx_buff = Port.BytesToRead >= 9 ? new byte[Port.BytesToRead] : new byte[9];
