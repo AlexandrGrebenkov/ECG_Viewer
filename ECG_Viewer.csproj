@@ -82,6 +82,7 @@
     <Compile Include="Filtr.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Service\Serial\ISerial.cs" />
+    <Compile Include="Service\Serial\Requests.cs" />
     <Compile Include="Service\Serial\Serial.cs" />
     <Compile Include="Views\Form1.cs">
       <SubType>Form</SubType>

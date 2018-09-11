@@ -31,12 +31,12 @@ namespace ECG_Viewer.Service.Serial
         public void StartMeasure()
         {
             if (!Serial.IsConnected) return;
-
             Serial.WriteData(new byte[] { 0x01 });
         }
 
         public void StopMeasure()
         {
+            if (!Serial.IsConnected) return;
             Serial.WriteData(new byte[] { 0x02 });
         }
 
