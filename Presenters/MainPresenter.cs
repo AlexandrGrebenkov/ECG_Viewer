@@ -23,6 +23,8 @@ namespace ECG_Viewer.Presenters
         /// <summary>Частота дискретизации, в Гц</summary>
         int Fd = 800;
 
+        const int ADCmax = 0xB96400;//0xC35000;//
+
         public MainPresenter(ISerial serial, IMainView view, IFileWorker fileWorker)
         {
             Serial = serial;
@@ -32,14 +34,23 @@ namespace ECG_Viewer.Presenters
             Requests = new Requests(Serial);
             Record = new Record();
 
+            var Ch1Packs = new List<double>();
+            var Ch2Packs = new List<double>();
+
+            Requests.MeasureDataHandler += data =>
+            {
+                Ch1Packs.Add(((data[0] - ADCmax / 2) * View.K_Ch1) / ADCmax);
+                Ch2Packs.Add(((data[1] - ADCmax / 2) * View.K_Ch2) / ADCmax);
+            };
+
             #region Serial Port
             int counter = 0;
             var timer = new Timer();
             timer.Interval = (int)(TimeStep * 1000);
             timer.Tick += (sender, args) =>
             {
-                var Ch1Packs = new List<double>();
-                var Ch2Packs = new List<double>();
+                Ch1Packs.Clear();
+                Ch2Packs.Clear();
                 int d = (int)(TimeStep * Fd);
                 for (int i = 0; i < d; i++)
                 {
