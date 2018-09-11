@@ -18,7 +18,7 @@ namespace ECG_Viewer.Service
         {
             if (record == null || 
                 record.Ch1 == null || record.Ch2 == null || 
-                record.Ch1.Count == 0 || record.Ch2.Count == 0)
+                record.Ch1.Length == 0 || record.Ch2.Length == 0)
             {
                 ErrorHandler?.Invoke("Отсутствуют данные для сохранения");
                 return;
@@ -34,12 +34,12 @@ namespace ECG_Viewer.Service
                     using (var fs = new FileStream(dialog.FileName, FileMode.Create))
                     using (var writer = new BinaryWriter(fs))
                     {
-                        writer.Write(record.Ch1.Count);
-                        for (int i = 0; i < record.Ch1.Count; i++)
+                        writer.Write(record.Ch1.Length);
+                        for (int i = 0; i < record.Ch1.Length; i++)
                             writer.Write(record.Ch1[i]);
 
-                        writer.Write(record.Ch2.Count);
-                        for (int i = 0; i < record.Ch2.Count; i++)
+                        writer.Write(record.Ch2.Length);
+                        for (int i = 0; i < record.Ch2.Length; i++)
                             writer.Write(record.Ch2[i]);
                     }
                 }
@@ -71,14 +71,14 @@ namespace ECG_Viewer.Service
                     {
                         record = new Record();
                         int sizeCh1 = reader.ReadInt32();
-                        record.Ch1 = new List<double>();
+                        record.Ch1 = new double[sizeCh1];
                         for (int i = 0; i < sizeCh1; i++)
-                            record.Ch1.Add(reader.ReadDouble());
+                            record.Ch1[i] = reader.ReadDouble();
 
                         int sizeCh2 = reader.ReadInt32();
-                        record.Ch2 = new List<double>();
+                        record.Ch2 = new double[sizeCh2];
                         for (int i = 0; i < sizeCh2; i++)
-                            record.Ch2.Add(reader.ReadDouble());
+                            record.Ch2[i] = reader.ReadDouble();
                     }
                 }
                 catch (Exception ex)

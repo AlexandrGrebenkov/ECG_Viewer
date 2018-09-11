@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace ECG_Viewer.Models
 {
+    /// <summary>
+    /// Класс записи ЭКГ
+    /// </summary>
     public class Record
     {
-        public List<double> Ch1;
-        public List<double> Ch2;
+        /// <summary>Канал 1</summary>
+        public double[] Ch1;
+        /// <summary>Канал 2</summary>
+        public double[] Ch2;
     }
 }

@@ -80,7 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filtr.cs" />
+    <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Service\Serial\ISerial.cs" />
+    <Compile Include="Service\Serial\Requests.cs" />
     <Compile Include="Service\Serial\Serial.cs" />
     <Compile Include="Views\Form1.cs">
       <SubType>Form</SubType>
@@ -94,6 +96,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\FileWorker.cs" />
     <Compile Include="Service\IFileWorker.cs" />
+    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IView.cs" />
     <EmbeddedResource Include="Views\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +143,13 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\Open_16px.png" />
+    <Content Include="Resources\Images\Play_16px.png" />
+    <Content Include="Resources\Images\Repeat_16px.png" />
+    <Content Include="Resources\Images\Save_16px.png" />
+    <Content Include="Resources\Images\Stop_16px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
