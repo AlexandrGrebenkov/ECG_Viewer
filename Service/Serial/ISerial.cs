@@ -36,5 +36,8 @@ namespace ECG_Viewer.Service.Serial
         /// <summary>Метод отправки данных в последовательный порт</summary>
         /// <param name="data">Байт-массив данных</param>
         void WriteData(byte[] data);
+
+        /// <summary>Событие о получении данных</summary>
+        event Action<byte[]> DataReceived;
     }
 }
