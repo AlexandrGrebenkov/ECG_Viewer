@@ -24,14 +24,14 @@ namespace ECG_Viewer
             {
                 if (value)
                 {
-                    OpenCloseConnectionButton.Text = "Закрыть";
+                    OpenCloseConnectionButton.Text = "Disconnect";
                     ConnectionSpeedSelectTextBox.Enabled =
                     SelectPortCBox.Enabled =
                     RefreshPortsButton.Enabled = false;
                 }
                 else
                 {
-                    OpenCloseConnectionButton.Text = "Открыть";
+                    OpenCloseConnectionButton.Text = "Connect";
                     ConnectionSpeedSelectTextBox.Enabled =
                     SelectPortCBox.Enabled =
                     RefreshPortsButton.Enabled = true;
