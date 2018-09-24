@@ -30,7 +30,7 @@ namespace ECG_Viewer.Presenters
             Serial = serial;
             View = view;
             FileWorker = fileWorker;
-             
+
             Requests = new Requests(Serial);
             Record = new Record();
 
