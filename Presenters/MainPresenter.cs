@@ -49,15 +49,22 @@ namespace ECG_Viewer.Presenters
             timer.Interval = (int)(TimeStep * 1000);
             timer.Tick += (sender, args) =>
             {
-                Ch1Packs.Clear();
-                Ch2Packs.Clear();
-                int d = (int)(TimeStep * Fd);
-                for (int i = 0; i < d; i++)
+                int d;
+                if (!Serial.IsConnected)
                 {
-                    counter++;
-                    Ch1Packs.Add(Math.Sin(counter * 4 * Math.PI / Record.Ch1.Length));
-                    Ch2Packs.Add(Math.Cos(counter * 4 * Math.PI / Record.Ch1.Length));
+                    Ch1Packs.Clear();
+                    Ch2Packs.Clear();
+                    d = (int)(TimeStep * Fd);
+                    for (int i = 0; i < d; i++)
+                    {
+                        counter++;
+                        Ch1Packs.Add(Math.Sin(counter * 4 * Math.PI / Record.Ch1.Length));
+                        Ch2Packs.Add(Math.Cos(counter * 4 * Math.PI / Record.Ch1.Length));
+                    }
                 }
+                else
+                    d = Ch1Packs.Count;
+
                 for (int i = 0; i < Record.Ch1.Length - d; i++)
                 {
                     Record.Ch1[i] = Record.Ch1[i + d];
