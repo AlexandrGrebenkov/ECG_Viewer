@@ -35,12 +35,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.MinYTextBox = new System.Windows.Forms.TextBox();
             this.MaxYTextBox = new System.Windows.Forms.TextBox();
-            this.ClearScreenButton = new System.Windows.Forms.Button();
             this.RefreshPortsButton = new System.Windows.Forms.Button();
             this.OpenCloseConnectionButton = new System.Windows.Forms.Button();
             this.ConnectionSpeedSelectTextBox = new System.Windows.Forms.TextBox();
             this.SelectPortCBox = new System.Windows.Forms.ComboBox();
-            this.ExitButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.K_Ch1_TextBox = new System.Windows.Forms.TextBox();
             this.K_Ch2_TextBox = new System.Windows.Forms.TextBox();
@@ -100,18 +98,6 @@
             this.MaxYTextBox.TabIndex = 274;
             this.MaxYTextBox.Text = "240.0";
             // 
-            // ClearScreenButton
-            // 
-            this.ClearScreenButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearScreenButton.Location = new System.Drawing.Point(46, 501);
-            this.ClearScreenButton.Name = "ClearScreenButton";
-            this.ClearScreenButton.Size = new System.Drawing.Size(113, 25);
-            this.ClearScreenButton.TabIndex = 269;
-            this.ClearScreenButton.Text = "Clear";
-            this.ClearScreenButton.UseVisualStyleBackColor = true;
-            this.ClearScreenButton.Click += new System.EventHandler(this.ClearScreenButton_Click);
-            // 
             // RefreshPortsButton
             // 
             this.RefreshPortsButton.Location = new System.Drawing.Point(6, 72);
@@ -148,19 +134,6 @@
             this.SelectPortCBox.Name = "SelectPortCBox";
             this.SelectPortCBox.Size = new System.Drawing.Size(104, 21);
             this.SelectPortCBox.TabIndex = 263;
-            // 
-            // ExitButton
-            // 
-            this.ExitButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ExitButton.Location = new System.Drawing.Point(46, 530);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(113, 25);
-            this.ExitButton.TabIndex = 268;
-            this.ExitButton.Text = "Exit";
-            this.ExitButton.UseVisualStyleBackColor = true;
-            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // label4
             // 
@@ -395,8 +368,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.ExitButton);
-            this.splitContainer1.Panel1.Controls.Add(this.ClearScreenButton);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
@@ -579,12 +550,10 @@
 
         private System.Windows.Forms.TextBox MinYTextBox;
         private System.Windows.Forms.TextBox MaxYTextBox;
-        private System.Windows.Forms.Button ClearScreenButton;
         private System.Windows.Forms.Button RefreshPortsButton;
         private System.Windows.Forms.Button OpenCloseConnectionButton;
         private System.Windows.Forms.TextBox ConnectionSpeedSelectTextBox;
         private System.Windows.Forms.ComboBox SelectPortCBox;
-        private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox K_Ch1_TextBox;
         private System.Windows.Forms.TextBox K_Ch2_TextBox;
