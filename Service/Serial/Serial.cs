@@ -22,11 +22,13 @@ namespace ECG_Viewer.Service.Serial
 
         public Serial()
         {
-            Port.ReadTimeout = 1; 
+            Port.ReadTimeout = 1;
             Port.DataReceived += (sender, args) =>
             {
                 var sp = (SerialPort)sender;
-                var rx = Encoding.UTF8.GetBytes(sp.ReadExisting());
+                var rx = new byte[sp.BytesToRead];
+                sp.Read(rx, 0, rx.Length);
+
                 DataReceived?.Invoke(rx);
             };
         }

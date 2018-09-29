@@ -4,6 +4,7 @@ using ECG_Viewer.Service.Serial;
 using ECG_Viewer.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -30,17 +31,25 @@ namespace ECG_Viewer.Presenters
             Serial = serial;
             View = view;
             FileWorker = fileWorker;
-             
+
             Requests = new Requests(Serial);
             Record = new Record();
 
             var Ch1Packs = new List<double>();
             var Ch2Packs = new List<double>();
+            object SyncObj = new object();
 
+            Stopwatch stopwatch = new Stopwatch();
             Requests.MeasureDataHandler += data =>
             {
-                Ch1Packs.Add(((data[0] - ADCmax / 2) * View.K_Ch1) / ADCmax);
-                Ch2Packs.Add(((data[1] - ADCmax / 2) * View.K_Ch2) / ADCmax);
+                stopwatch.Stop();
+                var delta = stopwatch.ElapsedMilliseconds; // Время между посылками
+                lock (SyncObj)
+                {
+                    Ch1Packs.Add(((data[0] - ADCmax / 2) * View.K_Ch1) / ADCmax);
+                    Ch2Packs.Add(((data[1] - ADCmax / 2) * View.K_Ch2) / ADCmax);
+                }
+                stopwatch.Restart();
             };
 
             #region Serial Port
@@ -49,33 +58,37 @@ namespace ECG_Viewer.Presenters
             timer.Interval = (int)(TimeStep * 1000);
             timer.Tick += (sender, args) =>
             {
-                int d;
-                if (!Serial.IsConnected)
+                lock (SyncObj)
                 {
-                    Ch1Packs.Clear();
-                    Ch2Packs.Clear();
-                    d = (int)(TimeStep * Fd);
+                    int d;
+                    if (!Serial.IsConnected)
+                    {
+                        Ch1Packs.Clear();
+                        Ch2Packs.Clear();
+                        d = (int)(TimeStep * Fd);
+                        for (int i = 0; i < d; i++)
+                        {
+                            counter++;
+                            Ch1Packs.Add(Math.Sin(counter * 4 * Math.PI / Record.Ch1.Length));
+                            Ch2Packs.Add(Math.Cos(counter * 4 * Math.PI / Record.Ch1.Length));
+                        }
+                    }
+                    else
+                        d = Ch1Packs.Count;
+
+                    for (int i = 0; i < Record.Ch1.Length - d; i++)
+                    {
+                        Record.Ch1[i] = Record.Ch1[i + d];
+                        Record.Ch2[i] = Record.Ch2[i + d];
+                    }
                     for (int i = 0; i < d; i++)
                     {
-                        counter++;
-                        Ch1Packs.Add(Math.Sin(counter * 4 * Math.PI / Record.Ch1.Length));
-                        Ch2Packs.Add(Math.Cos(counter * 4 * Math.PI / Record.Ch1.Length));
+                        Record.Ch1[Record.Ch1.Length - d + i] = Ch1Packs[i];
+                        Record.Ch2[Record.Ch1.Length - d + i] = Ch2Packs[i];
                     }
+                    Ch1Packs.Clear();
+                    Ch2Packs.Clear();
                 }
-                else
-                    d = Ch1Packs.Count;
-
-                for (int i = 0; i < Record.Ch1.Length - d; i++)
-                {
-                    Record.Ch1[i] = Record.Ch1[i + d];
-                    Record.Ch2[i] = Record.Ch2[i + d];
-                }
-                for (int i = 0; i < d; i++)
-                {
-                    Record.Ch1[Record.Ch1.Length - d + i] = Ch1Packs[i];
-                    Record.Ch2[Record.Ch1.Length - d + i] = Ch2Packs[i];
-                }
-
                 View.UpdateChart(Record);
             };
 
