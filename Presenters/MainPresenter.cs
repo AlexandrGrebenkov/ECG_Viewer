@@ -4,6 +4,7 @@ using ECG_Viewer.Service.Serial;
 using ECG_Viewer.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -37,13 +38,18 @@ namespace ECG_Viewer.Presenters
             var Ch1Packs = new List<double>();
             var Ch2Packs = new List<double>();
             object SyncObj = new object();
+
+            Stopwatch stopwatch = new Stopwatch();
             Requests.MeasureDataHandler += data =>
             {
+                stopwatch.Stop();
+                var delta = stopwatch.ElapsedMilliseconds; // Время между посылками
                 lock (SyncObj)
                 {
                     Ch1Packs.Add(((data[0] - ADCmax / 2) * View.K_Ch1) / ADCmax);
                     Ch2Packs.Add(((data[1] - ADCmax / 2) * View.K_Ch2) / ADCmax);
                 }
+                stopwatch.Restart();
             };
 
             #region Serial Port
