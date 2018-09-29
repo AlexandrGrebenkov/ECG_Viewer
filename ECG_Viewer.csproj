@@ -82,6 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filtr.cs" />
+    <Compile Include="Filtration\WindowFilter.cs" />
+    <Compile Include="Filtration\WindowType.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Service\Serial\ISerial.cs" />
     <Compile Include="Service\Serial\Requests.cs" />
