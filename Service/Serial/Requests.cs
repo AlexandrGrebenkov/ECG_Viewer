@@ -15,7 +15,7 @@ namespace ECG_Viewer.Service.Serial
             Serial.DataReceived += data =>
             {
                 //Очень не уверен, что это заработает. Надо дебажить!
-                if (data.Length != 9) return;
+                if (data.Length < 9) return;
                 if ((data[0] != 0xAA) ||
                    (data[1] != 0xAB) ||
                    (data[2] != 0xAC) ||
