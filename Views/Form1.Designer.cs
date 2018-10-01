@@ -124,7 +124,7 @@
             this.ConnectionSpeedSelectTextBox.Name = "ConnectionSpeedSelectTextBox";
             this.ConnectionSpeedSelectTextBox.Size = new System.Drawing.Size(104, 20);
             this.ConnectionSpeedSelectTextBox.TabIndex = 264;
-            this.ConnectionSpeedSelectTextBox.Text = "100000";
+            this.ConnectionSpeedSelectTextBox.Text = "115200";
             this.ConnectionSpeedSelectTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ConnectionSpeedSelectTextBox_KeyPress_1);
             // 
             // SelectPortCBox
@@ -189,8 +189,8 @@
             chartArea3.AxisX.MajorTickMark.Interval = 1D;
             chartArea3.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkRed;
             chartArea3.AxisX.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            chartArea3.AxisX.Maximum = 5D;
-            chartArea3.AxisX.Minimum = 0D;
+            chartArea3.AxisX.Maximum = 5D; // 5D
+            chartArea3.AxisX.Minimum = 0D; // 0D
             chartArea3.AxisX.MinorGrid.Enabled = true;
             chartArea3.AxisX.MinorGrid.LineColor = System.Drawing.Color.IndianRed;
             chartArea3.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
