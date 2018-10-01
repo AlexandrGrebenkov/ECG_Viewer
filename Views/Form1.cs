@@ -121,7 +121,7 @@ namespace ECG_Viewer
                     out double res))
                     return res;
                 res = 1;
-                tbRecordDuration.Text = res.ToString();
+                tbRecordDuration.Text = res.ToString("F1");
                 return res;
             }
         }
