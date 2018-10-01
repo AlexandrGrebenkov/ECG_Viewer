@@ -22,7 +22,7 @@ namespace ECG_Viewer.Presenters
         /// <summary>Время обновления данных, в секундах</summary>
         double TimeStep = 0.050;
         /// <summary>Частота дискретизации, в Гц</summary>
-        int Fd = 800;
+        int Fd = 1000;
 
         const int ADCmax = 0xB96400;//0xC35000;//
 
