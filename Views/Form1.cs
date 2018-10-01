@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using ECG_Viewer.Models;
 using ECG_Viewer.Views;
@@ -84,18 +85,14 @@ namespace ECG_Viewer
         {
             get
             {
-
-                double tmp = new double();
-                try
-                {
-                    tmp = double.Parse(K_Ch1_TextBox.Text);
-                    return tmp;
-                }
-                catch
-                {
-                    K_Ch1_TextBox.Text = "1371.4285714285714285714285714286";
-                    return 1.0d;
-                }
+                if (double.TryParse(K_Ch1_TextBox.Text.Replace(',', '.'),
+                                    NumberStyles.Any,
+                                    CultureInfo.InvariantCulture,
+                                    out double res))
+                    return res;
+                res = 1;
+                K_Ch1_TextBox.Text = res.ToString();
+                return res;
             }
         }
 
@@ -103,21 +100,31 @@ namespace ECG_Viewer
         {
             get
             {
-                double tmp = new double();
-                try
-                {
-                    tmp = double.Parse(K_Ch2_TextBox.Text);
-                    return tmp;
-                }
-                catch
-                {
-                    K_Ch2_TextBox.Text = "1371.4285714285714285714285714286";
-                    return 1.0d;
-                }
+                if (double.TryParse(K_Ch2_TextBox.Text.Replace(',', '.'),
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out double res))
+                    return res;
+                res = 1;
+                K_Ch2_TextBox.Text = res.ToString();
+                return res;
             }
         }
 
-        public double RecordDuration => double.Parse(tbRecordDuration.Text);
+        public double RecordDuration
+        {
+            get
+            {
+                if (double.TryParse(tbRecordDuration.Text.Replace(',', '.'), 
+                    NumberStyles.Any, 
+                    CultureInfo.InvariantCulture, 
+                    out double res))
+                    return res;
+                res = 1;
+                tbRecordDuration.Text = res.ToString("F1");
+                return res;
+            }
+        }
 
         public new void Show()
         {
